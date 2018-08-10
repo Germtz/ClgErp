@@ -1,13 +1,18 @@
 <div class="login-wrapper">
-    <form class="login">
+    <form class="login" (ngSubmit)="Login(FrmLogin)" #FrmLogin="ngForm">
         <section class="title">
             <h3 class="welcome">Bienvenido</h3>
             CLG ERP
             <h5 class="hint">Use su usuario y contraseña para acceder a sistema</h5>
         </section>
         <div class="login-group">
-            <input class="username" type="text" id="login_username" placeholder="Usuario">
-            <input class="password" type="password" id="login_password" placeholder="Password">
+            <!-- <input class="username" ngModel name="usuario" required type="text" id="login_username" placeholder="Usuario"> -->
+            <label for="usuario" aria-haspopup="false" role="tooltip" [ngClass]=" { 'invalid' : usuario.errors?.required  }" class="tooltip tooltip-validation tooltip-md">
+                 <input class="username" #usuario="ngModel"  ngModel name="usuario" required type="text" id="login_username" placeholder="Usuario">
+            </label>
+            <label for="usuario" aria-haspopup="false" role="tooltip" [ngClass]=" { 'invalid' : password.errors?.required  }" class="tooltip tooltip-validation tooltip-md">
+                <input class="password" #password="ngModel" ngModel name="password" required type="password" id="login_password" placeholder="Password">
+            </label>
             <div class="checkbox">
                 <input type="checkbox" id="rememberme">
                 <label for="rememberme">
@@ -15,9 +20,10 @@
             </label>
             </div>
             <div class="error active" *ngIf="LoginInvalido">
-                Usuario o contraeña incorrectos
+                {{ Error }}
             </div>
-            <button (click)="Login()" type="button" class="btn btn-primary">Entrar</button>
+            <!-- <button (click)="Login()" type="button" class="btn btn-primary">Entrar</button> -->
+            <button type="submit" class="btn btn-primary">Entrar</button>
         </div>
     </form>
-</div>
+</div>x
